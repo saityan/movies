@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.squareup.picasso.Picasso
 import saityan.misc.movies.databinding.FragmentMovieBinding
 import saityan.misc.movies.repository.Movie
 
@@ -33,11 +34,16 @@ class MovieFragment (
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val url = "https://image.tmdb.org/t/p/original" + movie.poster_path
         with (binding) {
             movieTitle.text = movie.title
             movieOverview.text = movie.overview
             movieReleaseDate.text = "Release Date: " + movie.release_date
             movieVoteAverage.text = "Average Vote: " + movie.vote_average
+            Picasso
+                .with(requireContext())
+                .load(url)
+                .into(binding.movieImage)
         }
     }
 
